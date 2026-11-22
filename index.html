@@ -373,11 +373,11 @@ function startRk(){sv={D,N};mn.hidden=true;pm.hidden=true;D=rkLv(tier()[3]);N=3;
 
 function rkRound(r,g){if(r===0){rs.cont=true;return 'Égalité : la manche est rejouée.'}r>0?rs.w++:rs.l++;if(rs.w<2&&rs.l<2){rs.cont=true;return 'Série '+rs.w+' - '+rs.l+', manche suivante.'}return endRk(rs.w>rs.l?1:-1,g|0)}
 function endRk(r,g){g=g|0;const o=tier(),i=o[3];let d;
- if(r>0){rk.streak=(rk.streak|0)+1;d=g>=3?130:100}else{rk.streak=0;d=g>=3?-130:-120}
- rk.pts=r>0?rk.pts+d:Math.max(rk.pts+d,RK[Math.floor(i/3)*3][1]);rk.rec=Math.max(rk.rec|0,rk.pts);
+ if(r>0){rk.streak=(rk.streak|0)+1;d=100}else{rk.streak=0;d=-120}
+ rk.pts=Math.max(0,rk.pts+d);rk.rec=Math.max(rk.rec|0,rk.pts);
  try{localStorage.setItem('mf_rank',JSON.stringify(rk))}catch(e){}
  D=sv.D;N=sv.N;ranked=false;const nw=tier()[0];showRk();addLb('rank',rk.pts,true);addLb('rec',rk.rec,true);setHn();
- return (r>0?'Série gagnée ':'Série perdue ')+rs.w+'-'+rs.l+' · '+(d>0?'+':'')+d+' pts'+(g>=3?' (écart de 3 buts ou plus)':'')+' · '+(nw!==o[0]?(d>0?'Promotion : ':'Rétrogradation : ')+nw:nw)}
+ return (r>0?'Série gagnée ':'Série perdue ')+rs.w+'-'+rs.l+' · '+(d>0?'+':'')+d+' pts'+' · '+(nw!==o[0]?(d>0?'Promotion : ':'Rétrogradation : ')+nw:nw)}
 let lb={jongles:[],penalty:[],cibles:[],rank:[],rec:[]},lbk='rank';
 try{Object.assign(lb,JSON.parse(localStorage.getItem('mf_lb')||'{}'))}catch(e){}
 function saveLb(){try{localStorage.setItem('mf_lb',JSON.stringify(lb))}catch(e){}}

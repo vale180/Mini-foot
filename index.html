@@ -359,7 +359,7 @@ function endRk(r){const d=r>0?25:r<0?-15:5,old=tier()[0];rk.pts=Math.max(0,rk.pt
 $('rkb').onclick=()=>{startMusic();startRk()};
 showRk();
 function tier(){let i=0;RK.forEach((x,j)=>{if(rk.pts>=x[1])i=j});return [RK[i][0],RK[i][1],i<3?'facile':i<6?'moyen':i<9?'difficile':'hard',i]}
-function showRk(){const t=tier(),n=RK[t[3]+1];$('rk').textContent=t[0]+' · '+rk.pts+' pts'+(n?' · '+(n[1]-rk.pts)+' avant '+n[0]:'')+' · Niveau '+(t[3]+1)+'/'+RK.length+' · Meilleur des 3'+((rk.streak|0)>1?' · '+rk.streak+' victoires de suite':'')+'';rkIcon()}
+function showRk(){const t=tier(),n=RK[t[3]+1];$('rk').textContent=t[0]+' · '+rk.pts+' pts'+(n?' · '+(n[1]-rk.pts)+' avant '+n[0]:'')+' · Niveau '+(t[3]+1)+'/'+RK.length+' · Match unique · v6'+((rk.streak|0)>1?' · '+rk.streak+' victoires de suite':'')+'';rkIcon()}
 function rkIcon(){const t=tier(),i=$('rki');if(i)i.src=RI[FK[fam(t[3])]]}
 function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
 function showRg(){const t=tier(),i=t[3],f=fam(i),h=$('rgh'),l=$('rgl');h.innerHTML='';l.innerHTML='';
@@ -371,13 +371,13 @@ $('rgx').onclick=()=>{$('rg').style.display='none'};
 function startRk(){sv={D,N};mn.hidden=true;pm.hidden=true;D=rkLv(tier()[3]);N=3;ranked=true;rs={w:0,l:0,cont:false};start()}
 
 
-function rkRound(r,g){if(r===0){rs.cont=true;return 'Égalité : la manche est rejouée.'}r>0?rs.w++:rs.l++;if(rs.w<2&&rs.l<2){rs.cont=true;return 'Série '+rs.w+' - '+rs.l+', manche suivante.'}return endRk(rs.w>rs.l?1:-1,g|0)}
+function rkRound(r,g){if(r===0){rs.cont=true;return 'Égalité : le match est rejoué.'}r>0?rs.w++:rs.l++;return endRk(r>0?1:-1,g|0)}
 function endRk(r,g){g=g|0;const o=tier(),i=o[3];let d;
  if(r>0){rk.streak=(rk.streak|0)+1;d=100}else{rk.streak=0;d=-120}
  rk.pts=Math.max(0,rk.pts+d);rk.rec=Math.max(rk.rec|0,rk.pts);
  try{localStorage.setItem('mf_rank',JSON.stringify(rk))}catch(e){}
  D=sv.D;N=sv.N;ranked=false;const nw=tier()[0];showRk();addLb('rank',rk.pts,true);addLb('rec',rk.rec,true);setHn();
- return (r>0?'Série gagnée ':'Série perdue ')+rs.w+'-'+rs.l+' · '+(d>0?'+':'')+d+' pts'+' · '+(nw!==o[0]?(d>0?'Promotion : ':'Rétrogradation : ')+nw:nw)}
+ return (r>0?'Victoire classée · ':'Défaite classée · ')+(d>0?'+':'')+d+' pts'+' · '+(nw!==o[0]?(d>0?'Promotion : ':'Rétrogradation : ')+nw:nw)}
 let lb={jongles:[],penalty:[],cibles:[],rank:[],rec:[]},lbk='rank';
 try{Object.assign(lb,JSON.parse(localStorage.getItem('mf_lb')||'{}'))}catch(e){}
 function saveLb(){try{localStorage.setItem('mf_lb',JSON.stringify(lb))}catch(e){}}

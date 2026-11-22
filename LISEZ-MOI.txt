@@ -1,0 +1,19 @@
+MINI FOOT CONNECTÉ — À CONFIGURER UNE SEULE FOIS
+
+Cette version remplace les dépendances Claude par Firebase Realtime Database :
+- Matchs entre amis par code à 5 caractères, avec état du match synchronisé en direct.
+- Classements partagés entre les joueurs.
+- Connexion anonyme Firebase : pas besoin de créer un compte joueur.
+- Installation PWA Android en plein écran.
+
+ÉTAPE OBLIGATOIRE :
+1) Crée un projet Firebase sur https://console.firebase.google.com/
+2) Dans Authentication > Sign-in method, active Anonymous.
+3) Dans Realtime Database, crée une base.
+4) Dans Rules, colle le contenu de REGLES_FIREBASE.txt et publie.
+5) Dans les paramètres du projet, ajoute une application Web et copie la configuration Firebase.
+6) Dans index.html, remplace les valeurs COLLER_API_KEY, COLLER_PROJECT_ID, COLLER_DATABASE_URL et COLLER_APP_ID dans l'objet firebaseConfig.
+7) Héberge tous les fichiers de ce dossier sur un site HTTPS (par exemple Firebase Hosting).
+8) Ouvre le site sur Android avec Chrome > menu ⋮ > Installer l'application.
+
+IMPORTANT : les règles de base fournies autorisent tous les utilisateurs connectés anonymement à lire et écrire les données du jeu. C'est pratique pour un petit jeu entre amis, mais ce n'est pas une protection anti-triche. Ne mets aucune donnée personnelle dans le jeu.

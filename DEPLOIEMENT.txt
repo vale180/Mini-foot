@@ -1,0 +1,20 @@
+MINI FOOT — METTRE EN LIGNE (5 minutes)
+
+La configuration Firebase est déjà dans index.html (projet mini-foot-dbba4).
+
+A) Dans la console Firebase (https://console.firebase.google.com/project/mini-foot-dbba4) :
+   1. Authentication > Sign-in method > Anonymous : activer.
+   2. Realtime Database : créer la base si ce n'est pas fait (région europe-west1).
+   3. Les règles sont publiées automatiquement par la commande ci-dessous.
+
+B) Sur ton ordinateur (Node.js installé), dans CE dossier :
+   npm install -g firebase-tools
+   firebase login
+   firebase deploy
+
+   Adresse du jeu : https://mini-foot-dbba4.web.app
+
+C) Sur Android : ouvre l'adresse dans Chrome > menu ⋮ > Installer l'application.
+
+SANS ORDINATEUR / ALTERNATIVE : Netlify Drop (app.netlify.com/drop) : glisse le dossier décompressé.
+Ajoute ensuite le domaine obtenu dans Firebase > Authentication > Settings > Authorized domains.

@@ -1,0 +1,30 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "leaderboard": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.hasChildren(['n','rank','rec','ss','jongles','penalty','cibles'])",
+        "n": { ".validate": "newData.isString() && newData.val().length <= 20" },
+        "rank": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1000000" },
+        "rec": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1000000" },
+        "ss": { ".validate": "newData.isNumber()" },
+        "jongles": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000" },
+        "penalty": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000" },
+        "cibles": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000" },
+        "$other": { ".validate": false }
+      }
+    },
+    "rooms": {
+      "$room": {
+        ".read": "auth != null",
+        "$role": {
+          ".write": "auth != null && (!data.exists() || data.child('u').val() === auth.uid) && (!newData.exists() || newData.child('u').val() === auth.uid)",
+          ".validate": "($role === 'host' || $role === 'guest') && newData.child('u').val() === auth.uid"
+        }
+      }
+    }
+  }
+}
